@@ -7,14 +7,17 @@ const authRoutes = require('./auth/authRoutes');
 
 // https://docs.google.com/document/d/1vof93vN56kBMxxc3iFvHwYbH_soDA4zPAqBC-M76Xog/edit?usp=sharing
 
-const port = 4001;
+const port = process.env.PORT || 4001;
 
 
 function startServer(){
 
     const app = express();                      // createApplication()
+    app.use(bodyParser.urlencoded({extended:false}));
 
     app.use(bodyParser.json());
+
+    app.set('view engine', 'ejs');
     
 
     mongooseConnect(app);
@@ -24,7 +27,8 @@ function startServer(){
     // test api
     app.get('/',(req,res)=>{
 
-        res.send("WELCOME TO APP");
+
+        res.send('Welcome to app');
 
     })
 

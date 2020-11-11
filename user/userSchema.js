@@ -48,9 +48,15 @@ const User = new Schema(
         createdAt:{
             type: Date,
             default: Date.now()
-        }
+        },
 
-        
+        resetToken:{
+            type: String
+        },
+
+        resetTokenExpiry: {
+            type: Date
+        }
 
     }
 )

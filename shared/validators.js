@@ -44,6 +44,23 @@ exports.validate = (method) => {
 
 
         }
+        break;
+
+        case 'resetPassword':{
+            return [
+
+                body('password').exists().isLength({min:8}).withMessage('Password should contain atleast 8 characters')
+                    .custom( (value,{req}) => {
+                        if(req.body.confirmPassword === value){
+                            return value;
+                        }
+
+                        throw new Error("Passwords dont match");
+                    }),
+            ]
+        }
+        
+        break;
 
 
     }
