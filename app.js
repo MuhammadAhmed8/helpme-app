@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const handleError = require('./shared/errorHandler').handleError;
 const authRoutes = require('./auth/authRoutes');
+const userRoutes = require('./user/userRoutes');
 
 // https://docs.google.com/document/d/1vof93vN56kBMxxc3iFvHwYbH_soDA4zPAqBC-M76Xog/edit?usp=sharing
 
@@ -23,7 +24,8 @@ function startServer(){
     mongooseConnect(app);
 
     app.use('/auth',authRoutes);
-    
+    app.use('/user',userRoutes);
+
     // test api
     app.get('/',(req,res)=>{
 

@@ -21,7 +21,7 @@ class AuthService{
     */
     async signUp(userDTO){
      
-        if (await User.findOne({phone: userDTO.phone}) ){
+        if (await User.findOne({phone: userDTO.phone}, {_id:1} ) ){
             throw new Error("User already exists");
         }
 

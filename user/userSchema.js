@@ -41,6 +41,11 @@ const User = new Schema(
             required: true
         },
 
+        location:{
+            type:{type:String},
+            coordinates:[]
+        },
+
         salt: {
             type: String
         },
@@ -60,5 +65,9 @@ const User = new Schema(
 
     }
 )
+
+User.index({
+    location:"2dsphere"
+});
 
 module.exports = mongoose.model('User',User);
