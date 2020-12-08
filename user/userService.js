@@ -8,7 +8,7 @@ class UserService{
 
     async updateUserLocation(userId,newCoordinates){
         
-        await User.updateOne({userId: userId}, { $set: {
+        await User.updateOne({_id: userId}, { $set: {
             location:{
                 type:"Point",
                 coordinates: newCoordinates
