@@ -41,6 +41,11 @@ const User = new Schema(
             required: true
         },
 
+        image: {
+            type: String,
+            default: "no dp",
+        },
+
         location:{
             type:{type:String},
             coordinates:[]
@@ -50,20 +55,30 @@ const User = new Schema(
             type: String
         },
 
-        createdAt:{
-            type: Date,
-            default: Date.now()
-        },
-
         resetToken:{
             type: String
         },
 
         resetTokenExpiry: {
             type: Date
-        }
+        },
 
-    }
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "User"
+            }
+        ],
+
+        services: [
+            {
+                type: String
+            }
+        ]
+
+    },
+
+    {timestamps: true}
 )
 
 User.index({

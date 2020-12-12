@@ -1,4 +1,3 @@
-const { model } = require("./userSchema");
 const User = require("./userSchema");
 
 
@@ -8,7 +7,7 @@ class UserService{
 
     async updateUserLocation(userId,newCoordinates){
         
-        await User.updateOne({phone: userId}, { $set: {
+        await User.updateOne({_id: userId}, { $set: {
             location:{
                 type:"Point",
                 coordinates: newCoordinates
@@ -16,13 +15,11 @@ class UserService{
           }
         })
 
-
-
     }
 
     async findNearByUsers(long,lat,radius){
 
-        await User.find({location:
+        return await User.find({location:
                     {
                         $near:
                         {
@@ -36,8 +33,24 @@ class UserService{
                             $minDistance:0
                         }
                     }
-                });
+                }).select("_id");
 
+    }
+
+
+    async addFriend(user1_id,user2_id){
+        await User.updateOne({_id: user1_id}, {$push: {
+            friends : user2_id
+        }});
+
+    }
+
+    async getFriendsIds(userId){
+        return await User.findById(userId, {_id:0, friends:1});
+    }
+
+    async isUserReputationValid(userid){
+        return true;
     }
 
 }

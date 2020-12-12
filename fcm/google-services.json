@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "122686494779",
+    "firebase_url": "https://helpme-3b128.firebaseio.com",
+    "project_id": "helpme-3b128",
+    "storage_bucket": "helpme-3b128.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122686494779:android:6c55bba988f14fb364241e",
+        "android_client_info": {
+          "package_name": "com.unique.helpforce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122686494779-3bpkoi1klrrdgda20ajrm9r4t72q8hr8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTCpWR4LW-Bi2za6GITH3eOJLkAnFRG9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122686494779-3bpkoi1klrrdgda20ajrm9r4t72q8hr8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

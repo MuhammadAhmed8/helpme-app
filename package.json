@@ -14,12 +14,14 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
+    "firebase-admin": "^9.4.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.12",
     "node-mailer": "^0.1.1",
     "nodemailer": "^6.4.15",
-    "nodemailer-sendgrid-transport": "^0.2.0"
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "pusher": "^4.0.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.8",

@@ -5,10 +5,13 @@ const expressValidator = require('express-validator');
 const handleError = require('./shared/errorHandler').handleError;
 const authRoutes = require('./auth/authRoutes');
 const userRoutes = require('./user/userRoutes');
+const postRoutes = require('./post/postRoutes');
+const helpRequestRoutes = require('./helpRequest/helpRequestRoutes');
+const authMiddleware = require("./middlewares/auth");
 
 // https://docs.google.com/document/d/1vof93vN56kBMxxc3iFvHwYbH_soDA4zPAqBC-M76Xog/edit?usp=sharing
 
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 4002;
 
 
 function startServer(){
@@ -24,7 +27,11 @@ function startServer(){
     mongooseConnect(app);
 
     app.use('/auth',authRoutes);
+
+
     app.use('/user',userRoutes);
+    app.use(postRoutes);
+    app.use(helpRequestRoutes);
 
     // test api
     app.get('/',(req,res)=>{
