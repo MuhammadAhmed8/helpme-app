@@ -18,8 +18,8 @@ exports.createHelpRequest = async (req,res,next) => {
         if(req.body.urgencyLevel !== undefined) 
             requestData['urgencyLevel'] = req.body.urgencyLevel;
         
-        if(req.body.nearybyUsersAllowed !== undefined){
-            requestData['nearybyUsersAllowed'] = req.body.nearybyUsersAllowed;
+        if(req.body.nearbyUsersAllowed !== undefined){
+            requestData['nearbyUsersAllowed'] = req.body.nearbyUsersAllowed;
         }
 
         const helpRequestService = new HelpRequestService();
