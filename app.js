@@ -8,10 +8,11 @@ const userRoutes = require('./user/userRoutes');
 const postRoutes = require('./post/postRoutes');
 const helpRequestRoutes = require('./helpRequest/helpRequestRoutes');
 const authMiddleware = require("./middlewares/auth");
+const servicesRoutes = require("./helpServices/routes");
 
 // https://docs.google.com/document/d/1vof93vN56kBMxxc3iFvHwYbH_soDA4zPAqBC-M76Xog/edit?usp=sharing
 
-const port = process.env.PORT || 4002;
+const port = process.env.PORT || 4001;
 
 
 function startServer(){
@@ -28,23 +29,38 @@ function startServer(){
 
     app.use('/auth',authRoutes);
 
-
     app.use('/user',userRoutes);
     app.use(postRoutes);
-    app.use(helpRequestRoutes);
 
     // test api
-    app.get('/',(req,res)=>{
+    app.get('/',async (req,res)=>{
 
 
-        res.send('Welcome to app');
+
+        //test adding helpservices
+     const s = new Service();
+    //await s.addServices("Debris Pickup","Cleaning");
+    // await s.addServices("Car Mechanic",null);
+      //  console.log(await s.getAllServices());
+    //  console.log(await s.getServicesByName("mech"));
+
+     // -----------
+
+     res.send('Welcome to app');
+
+ 
 
     })
+    
+    app.use(helpRequestRoutes);
+    app.use(servicesRoutes);
 
-
+    
     app.use((err,req,res,next)=>{
        handleError(err,res);
     })
+
+
 
 }
 

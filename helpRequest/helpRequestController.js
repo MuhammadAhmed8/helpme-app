@@ -1,5 +1,6 @@
 const helpRequestSchema = require("./helpRequestSchema");
 const HelpRequestService = require("./helpRequestService");
+const UserService = require("../user/userService");
 
 exports.createHelpRequest = async (req,res,next) => {
 

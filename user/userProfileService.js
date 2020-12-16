@@ -7,14 +7,28 @@ class UserProfileService{
 
     constructor(){}
 
-    async getUserProfile(userId){
+    async getUserProfile(personId,userId){
 
-        return await User.findOne({_id: userId})
-                         .select("_id firstName lastName image phone dob gender")
-                         .populate('friends', "_id firstName lastName image");
+        let profile = User.findOne({_id: personId})
+                          .select("_id firstName lastName image dob gender reviews reputation")
+                          .populate("reviews");
+        
+        const userService = new UserService();
 
-      
+        if(userId === personId){
+            profile.populate('friends', "_id firstName lastName image");
+        }
+
+        if(userId === personId || userService.isFriend(userId,personId) ){
+            profile.select('phone');   
+        }
+
+        return await profile;
+
+        
     }
+
+
 
     async updateName(userId, name, index){
 

@@ -71,10 +71,35 @@ const User = new Schema(
         ],
 
         services: [
+            {   
+                type: Schema.Types.ObjectId,
+                ref: "ServicesSchema"
+            }
+        ],
+
+        reputation:{
+            type: Number
+        },
+
+        reviews: [
             {
-                type: String
+                content: String,
+                authorId: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'User'
+                },
+            
+            }
+        ],
+
+        deviceRegistrationTokens:[
+            {
+                type:String,
+                unique: true
             }
         ]
+
+
 
     },
 

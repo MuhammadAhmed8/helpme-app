@@ -12,4 +12,6 @@ router.post("/friend",UserController.addFriend);
 
 router.get("/profile/:userId",UserController.getProfile);
 
+router.post("/deviceRegistrationToken", UserController.addDeviceRegistrationToken);
+
 module.exports = router;

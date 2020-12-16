@@ -1,6 +1,8 @@
 const User = require("../user/userSchema");
 const UserService = require("../user/userService");
 const HelpRequest = require("./helpRequestSchema");
+const notificationService = require("../shared/notification");
+
 
 class HelpRequestService{
 
@@ -30,10 +32,29 @@ class HelpRequestService{
         console.log(nearbyUsers);
         console.log(friends);
 
-        return await HelpRequest.create({
+        const rec = await HelpRequest.create({
             ...requestData,
             requestedTo: [...nearbyUsers,...friends]
         })
+
+        if(req){
+            const devTokens = await User.find({ _id : {$in: rec.requestedTo}}, {_id: 0}).select("deviceRegistrationTokens");
+
+            devTokens = devTokens.map(t => {
+                return [...t.deviceRegistrationTokens]
+            })
+
+            payload = {
+                notification:{
+                    title: rec.description,
+                    body:  'NEED HELPPPPPP'
+                }
+            }
+            notificationService.sendNotification(devTokens,payload);
+        }
+
+        return rec;
+
         
     }
 
