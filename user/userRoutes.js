@@ -14,4 +14,6 @@ router.get("/profile/:userId",UserController.getProfile);
 
 router.post("/deviceRegistrationToken", UserController.addDeviceRegistrationToken);
 
+
+
 module.exports = router;

@@ -9,6 +9,7 @@ const postRoutes = require('./post/postRoutes');
 const helpRequestRoutes = require('./helpRequest/helpRequestRoutes');
 const authMiddleware = require("./middlewares/auth");
 const servicesRoutes = require("./helpServices/routes");
+const ratingsRoutes = require("./ratings/ratingsRoutes");
 
 // https://docs.google.com/document/d/1vof93vN56kBMxxc3iFvHwYbH_soDA4zPAqBC-M76Xog/edit?usp=sharing
 
@@ -32,13 +33,14 @@ function startServer(){
     app.use('/user',userRoutes);
     app.use(postRoutes);
 
+
     // test api
     app.get('/',async (req,res)=>{
 
 
 
         //test adding helpservices
-     const s = new Service();
+    // const s = new Service();
     //await s.addServices("Debris Pickup","Cleaning");
     // await s.addServices("Car Mechanic",null);
       //  console.log(await s.getAllServices());
@@ -54,7 +56,7 @@ function startServer(){
     
     app.use(helpRequestRoutes);
     app.use(servicesRoutes);
-
+    app.use(ratingsRoutes);
     
     app.use((err,req,res,next)=>{
        handleError(err,res);

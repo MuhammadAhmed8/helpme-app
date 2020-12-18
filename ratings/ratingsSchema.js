@@ -9,7 +9,7 @@ const RatingsSchema = new Schema({
         required: true
     },
 
-    userId :  {
+    ratedTo :  {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -22,7 +22,8 @@ const RatingsSchema = new Schema({
         max: 5
     },
 
-    
-
-
 });
+
+RatingsSchema.index({ratedTo: 1,ratedBy: 1}, {unique:true});
+
+module.exports = mongoose.model("Ratings",RatingsSchema);
