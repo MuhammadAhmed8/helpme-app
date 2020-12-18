@@ -8,7 +8,28 @@ exports.giveRating = async (req,res,next) => {
         const {ratedTo,score} = req.body;
         const ratedBy = req.user.id;
 
-        const rec = await ratingsService.giveRating(ratedBy,ratedTo,score);
+        await ratingsService.giveRating(ratedBy,ratedTo,score);
+
+        res.status(200).json({
+            success: true
+        });
+
+    }
+    catch(e){
+        next(e);
+    }
+
+}
+
+exports.getRating = async (req,res,next) => {
+
+    try{
+        
+        const {ratedTo} = req.params;
+
+        const userId = req.user.id;
+
+        const rec = await ratingsService.getRating(ratedTo);        // {_id, avgRating}
 
         res.status(200).json(rec);
 

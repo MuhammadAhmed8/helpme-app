@@ -11,7 +11,7 @@ const ratingsRoutes = require("./ratings/ratingsRoutes");
 
 // https://docs.google.com/document/d/1vof93vN56kBMxxc3iFvHwYbH_soDA4zPAqBC-M76Xog/edit?usp=sharing
 
-const port = process.env.PORT || 4002;
+const port = process.env.PORT || 4001;
 
 
 function startServer(){
