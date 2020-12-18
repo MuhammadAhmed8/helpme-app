@@ -38,18 +38,7 @@ function startServer(){
     app.get('/',async (req,res)=>{
 
 
-
-        //test adding helpservices
-    // const s = new Service();
-    //await s.addServices("Debris Pickup","Cleaning");
-    // await s.addServices("Car Mechanic",null);
-      //  console.log(await s.getAllServices());
-    //  console.log(await s.getServicesByName("mech"));
-
-     // -----------
-
      res.send('Welcome to app');
-
  
 
     })
