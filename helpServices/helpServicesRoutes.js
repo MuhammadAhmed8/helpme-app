@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const serviceController = require('./servicesController');
+const serviceController = require('./helpServicesController');
 
 
 router.get('/services/:name?',serviceController.getServices);

@@ -1,13 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
 const handleError = require('./shared/errorHandler').handleError;
 const authRoutes = require('./auth/authRoutes');
 const userRoutes = require('./user/userRoutes');
 const postRoutes = require('./post/postRoutes');
 const helpRequestRoutes = require('./helpRequest/helpRequestRoutes');
-//const servicesRoutes = require("./helpServices/routes");
+const servicesRoutes = require("./helpServices/helpServicesRoutes");
 const ratingsRoutes = require("./ratings/ratingsRoutes");
 
 // https://docs.google.com/document/d/1vof93vN56kBMxxc3iFvHwYbH_soDA4zPAqBC-M76Xog/edit?usp=sharing
@@ -43,7 +42,7 @@ function startServer(){
     })
     
     app.use(helpRequestRoutes);
-    //app.use(servicesRoutes);
+    app.use(servicesRoutes);
     app.use(ratingsRoutes);
     
     app.use((err,req,res,next)=>{

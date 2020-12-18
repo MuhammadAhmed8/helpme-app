@@ -1,11 +1,9 @@
-const { isNumericLiteral } = require('typescript');
-const { takeAction } = require('../helpRequest/helpRequestController');
-const ServicesService = require('./service');
+const ServicesService = require('./helpServicesService');
 
 exports.getServices = async (req,res,next) => {
 
     try{
-
+ 
         const servicesService = new ServicesService();
 
         let name = req.params.name;
