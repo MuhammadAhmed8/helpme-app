@@ -56,8 +56,8 @@ exports.servicesRequestReceived = async (req,res,next) => {
         let status = req.params.status;
 
         const servicesService = new ServicesService();
-        const rec = servicesService.allServicesAppointmentsGot(userId,status);
-
+        const rec = await servicesService.allServicesAppointmentsGot(userId,status);
+        console.log(rec);
         return res.status(200).json(rec);
 
     }
@@ -77,7 +77,7 @@ exports.servicesRequestSent = async (req,res,next) => {
         const servicesService = new ServicesService();
         const rec = servicesService.allServicesAppointmentsPosted(userId,status);
 
-        res.status.json(rec);
+        res.status(200).json(rec);
 
     }
     catch(e){

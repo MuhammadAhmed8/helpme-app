@@ -69,7 +69,8 @@ class Service{
     }
 
     async allServicesAppointmentsGot(userId,status){
-        return await appointmentsSchema.find({serviceProviderId: userId, status: status}).sort({createdAt: -1}).limit(10);
+        console.log(userId);
+        return await appointmentsSchema.find({serviceProviderId: userId});
     }
 
     async allServicesAppointmentsPosted(userId, status){
