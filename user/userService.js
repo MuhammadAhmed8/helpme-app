@@ -62,6 +62,7 @@ class UserService{
     }
 
     async addDeviceRegistrationToken(userId,devToken){
+        console.log("hii");
         const exists =  await User.findOne({_id: userId, deviceRegistrationTokens: devToken}).select("_id");
 
         if(exists) return;

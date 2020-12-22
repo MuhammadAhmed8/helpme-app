@@ -15,5 +15,6 @@ router.get('/services/request/sent/:status?',serviceController.servicesRequestSe
 
 router.post('/services/request/respond',serviceController.respond);
 
+router.get('/services/providers/:serviceName',serviceController.findServiceProviders);
 
 module.exports = router;

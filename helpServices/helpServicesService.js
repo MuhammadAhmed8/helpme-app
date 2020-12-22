@@ -49,6 +49,14 @@ class Service{
         return await serviceSchema.find({});
     }
 
+    async findServiceProviders(serviceName){
+        const s = await serviceSchema.findOne({name: serviceName.toLowerCase()});
+        if(!s){
+            throw new Error("service doesnt exist");
+        }
+
+        return await User.find({services: s._id}).select("_id firstName lastName phone image");
+    }
 
     async requestAppointment(serviceProviderId,serviceName,userId){
 

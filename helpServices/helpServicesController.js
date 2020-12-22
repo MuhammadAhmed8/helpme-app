@@ -86,6 +86,22 @@ exports.servicesRequestSent = async (req,res,next) => {
 
 }
 
+exports.findServiceProviders = async (req,res,next) => {
+    try{
+        let userId = req.user.id;
+        let serviceName = req.params.serviceName;
+        const servicesService = new ServicesService();
+        const rec = await servicesService.findServiceProviders(serviceName);
+
+        res.status(200).json(rec);
+
+    }
+    catch(e){
+        next(e);
+    }
+}
+
+
 exports.sendRequest = async (req,res,next) => {
     try{
         let userId = req.user.id;

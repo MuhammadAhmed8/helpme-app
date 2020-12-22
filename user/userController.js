@@ -60,7 +60,9 @@ exports.addDeviceRegistrationToken = async (req,res,next)=>{
     try{
 
         await userService.addDeviceRegistrationToken(req.user.id,req.body.devToken);
-
+        res.status(200).json({
+            success: true
+        })
 
     }
     catch(e){
