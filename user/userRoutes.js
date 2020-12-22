@@ -10,7 +10,7 @@ router.put("/location",UserController.updateLocation);
 
 router.post("/friend",UserController.addFriend);
 
-router.get("/profile/:userId",UserController.getProfile);
+router.get("/profile/:personId",UserController.getProfile);
 
 router.post("/deviceRegistrationToken", UserController.addDeviceRegistrationToken);
 
