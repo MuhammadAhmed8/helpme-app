@@ -37,7 +37,7 @@ class HelpRequestService{
             requestedTo: [...nearbyUsers,...friends]
         })
 
-        if(req){
+        /*if(rec){
             const devTokens = await User.find({ _id : {$in: rec.requestedTo}}, {_id: 0}).select("deviceRegistrationTokens");
 
             devTokens = devTokens.map(t => {
@@ -52,7 +52,7 @@ class HelpRequestService{
             }
             notificationService.sendNotification(devTokens,payload);
         }
-
+        */
         return rec;
 
         

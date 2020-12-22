@@ -28,6 +28,9 @@ function startServer(){
 
     app.use('/auth',authRoutes);
 
+    app.use(helpRequestRoutes);
+    app.use(servicesRoutes);
+    app.use(ratingsRoutes);
     app.use('/user',userRoutes);
     app.use(postRoutes);
 
@@ -41,9 +44,6 @@ function startServer(){
 
     })
     
-    app.use(helpRequestRoutes);
-    app.use(servicesRoutes);
-    app.use(ratingsRoutes);
     
     app.use((err,req,res,next)=>{
        handleError(err,res);
