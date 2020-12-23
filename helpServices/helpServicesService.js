@@ -53,9 +53,81 @@ class Service{
         const s = await serviceSchema.findOne({name: serviceName.toLowerCase()});
         if(!s){
             throw new Error("service doesnt exist");
-        }
+        }   
 
-        return await User.find({services: s._id}).select("_id firstName lastName phone image");
+        return await User.aggregate([
+            {
+                $match: {
+                    services: s._id
+                }
+            },
+            {
+              $lookup: {
+                from: "ratings",
+                localField: "_id",
+                foreignField: "ratedTo",
+                as: "ratings"
+              }
+            },
+            {
+              "$addFields": {
+                ratings: {
+                  $reduce: {
+                    input: "$ratings",
+                    initialValue: {
+                      count: 0,
+                      sum: 0
+                    },
+                    in: {
+                      count: {
+                        $sum: [
+                          "$$value.count",
+                          1
+                        ]
+                      },
+                      sum: {
+                        $sum: [
+                          "$$value.sum",
+                          "$$this.score"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              $addFields: {
+                ratingAvg: {
+                    $cond: [
+                        {
+                            $eq: ["$ratings.count",0]
+                        },
+                        "$ratings.sum",
+                        {
+                            $divide: [
+                                "$ratings.sum",
+                                "$ratings.count"
+                                ]
+                        }
+
+                    ]
+                    
+                }
+              }
+            },
+            {
+              $project: {
+                firstName:1,
+                lastName: 1,
+                location: 1,
+                image:1,
+                phone: 1,
+                ratingAvg:1,
+              }
+            }
+          ]);
+
     }
 
     async requestAppointment(serviceProviderId,serviceName,userId){
