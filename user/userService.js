@@ -39,9 +39,10 @@ class UserService{
     }
 
 
-    async addFriend(user1_id,user2_id){
-        await User.updateOne({_id: user1_id}, {$push: {
-            friends : user2_id
+    async addFriend(user1_id,friendPhone){
+        const user2 = await User.findOne({phone: phone}).select("_id");
+        await User.updateOne({_id: user1_id}, {$addToSet: {
+            friends : user2._id
         }});
 
     }
@@ -58,7 +59,12 @@ class UserService{
     }
 
     async isUserReputationValid(userId){
-       return await User.findById(userId).select("reports").reports;
+       const u = await User.findById(userId).select("reports");
+       const n = u.reports !== undefined ? u.reports.length : 0;
+       if(n >= 3){
+           return false;
+       }
+       return true;
 
     }
 
@@ -98,7 +104,7 @@ class UserService{
         }
 
         async reportUser(reportedBy,reportedTo,label){
-            console.log(await this.isUserReputationValid(reportedTo));
+            console.log(await this.isUserReputationValid(reportedBy));
             await User.updateOne({_id: reportedTo}, {$push: {
                     reports: {
                         createdAt: Date.now,

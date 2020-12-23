@@ -63,8 +63,8 @@ exports.servicesRequestReceived = async (req,res,next) => {
         Promise.all([serviceReq,helpReq]).then(result => {
             console.log(result);
             return res.status(200).json({
-                helpRequests: result[0],
-                serviceRequests: result[1]
+                serviceRequests: result[0],
+                helpRequests: result[1]
             });
 
         });

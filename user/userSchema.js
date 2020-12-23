@@ -107,7 +107,11 @@ const User = new Schema(
                     ref: 'User'
                 }
             }
-        ]
+        ],
+
+        bloodGroup: {
+            type: String,
+        }
 
 
 

@@ -10,13 +10,13 @@ class UserProfileService{
     async getUserProfile(personId,userId){
 
         let profile = User.findOne({_id: personId})
-                          .select("_id firstName lastName image dob gender reviews reputation")
-                          .populate("reviews");
+                          .populate("reviews")
+                          .select("_id firstName lastName image dob gender reviews email")
         
         const userService = new UserService();
 
         if(userId === personId){
-            profile.populate('friends', "_id firstName lastName image");
+            profile.populate('friends', "_id firstName lastName image phone");
         }
 
         if(userId === personId || userService.isFriend(userId,personId) ){

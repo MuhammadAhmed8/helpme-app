@@ -26,10 +26,15 @@ exports.updateLocation = async (req,res,next) => {
 exports.addFriend = async (req,res,next) => {
 
     try{
-        let userId = req.body.userId;
-        let friendId = req.body.friendId;
-
-        const profile = await userService.addFriend(userId,friendId);
+        let userId = req.user.id;
+        let friendphone = req.body.phone;
+        if(userId === friendId){
+            res.status(402).json({
+                success: false,
+                msg: "You cant befriend yourself"
+            })
+        }
+        const profile = await userService.addFriend(userId,friendphone);
         res.status(200).json(profile);
     }
     catch(e){
@@ -79,6 +84,13 @@ exports.giveReview = async (req,res,next) => {
         let user2_id = req.body.userId;
         let content = req.body.content;
 
+        if(user1_id === user2_id){
+            res.status(402).json({
+                success: false,
+                msg: 'You cant give review to yourself'
+            })
+        }
+
         const review = await userService.giveReview(content,user1_id,user2_id);
 
         res.status(200).json({
@@ -95,10 +107,9 @@ exports.giveReview = async (req,res,next) => {
 exports.reportUser = async (req,res,next) => {
 
     try{
-
         let reportedBy = req.user.id;
         let {reportedTo,label} = req.body;
-
+        
         const report = await userService.reportUser(reportedBy,reportedTo,label);
 
         res.status(200).json({

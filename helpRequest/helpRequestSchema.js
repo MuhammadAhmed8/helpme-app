@@ -39,6 +39,10 @@ const HelpRequest = new Schema({
         required: false,
     },
 
+    bloodGroup:{
+        type: String
+    },
+
     urgencyLevel : {
         type:String,
         enum: ['Low','Moderate','High'],

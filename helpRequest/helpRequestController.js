@@ -8,7 +8,8 @@ exports.createHelpRequest = async (req,res,next) => {
 
         const requestData = {
             creatorId : req.user.id,
-            description : req.body.description,
+            description : req.body.description.toLowerCase(),
+            bloodGroup : req.body.bloodGroup
         };
 
         const userLocation = {
