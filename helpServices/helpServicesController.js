@@ -1,3 +1,4 @@
+const HelpRequestService = require('../helpRequest/helpRequestService');
 const ServicesService = require('./helpServicesService');
 
 exports.getServices = async (req,res,next) => {
@@ -56,9 +57,17 @@ exports.servicesRequestReceived = async (req,res,next) => {
         let status = req.params.status;
 
         const servicesService = new ServicesService();
-        const rec = await servicesService.allServicesAppointmentsGot(userId,status);
-        console.log(rec);
-        return res.status(200).json(rec);
+        const helpRequestService = new HelpRequestService();
+        let serviceReq =  servicesService.allServicesAppointmentsGot(userId,status);
+        let helpReq =  helpRequestService.getHelpRequests(userId);
+        Promise.all([serviceReq,helpReq]).then(result => {
+            console.log(result);
+            return res.status(200).json({
+                helpRequests: result[0],
+                serviceRequests: result[1]
+            });
+
+        });
 
     }
     catch(e){

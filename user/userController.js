@@ -92,6 +92,26 @@ exports.giveReview = async (req,res,next) => {
 
 }
 
+exports.reportUser = async (req,res,next) => {
+
+    try{
+
+        let reportedBy = req.user.id;
+        let {reportedTo,label} = req.body;
+
+        const report = await userService.reportUser(reportedBy,reportedTo,label);
+
+        res.status(200).json({
+            success: true
+        });
+
+    }
+    catch(e){
+        next(e);
+    }
+
+}
+
 
 exports.uploadImage = async (req, res, next) => {
     

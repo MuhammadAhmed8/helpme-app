@@ -57,8 +57,9 @@ class UserService{
         return await User.findById(userId, {_id:0, friends:1});
     }
 
-    async isUserReputationValid(userid){
-        return true;
+    async isUserReputationValid(userId){
+       return await User.findById(userId).select("reports").reports;
+
     }
 
     async addDeviceRegistrationToken(userId,devToken){
@@ -94,6 +95,17 @@ class UserService{
 
         async uploadProfilePhoto(uid,file){
             await User.updateOne({_id: uid}, {$set: {image: file.path}});
+        }
+
+        async reportUser(reportedBy,reportedTo,label){
+            console.log(await this.isUserReputationValid(reportedTo));
+            await User.updateOne({_id: reportedTo}, {$push: {
+                    reports: {
+                        createdAt: Date.now,
+                        reportedBy: reportedBy,
+                        label: label
+                    }
+                }});
         }
 
 

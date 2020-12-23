@@ -32,10 +32,12 @@ class HelpRequestService{
         console.log(nearbyUsers);
         console.log(friends);
 
-        const rec = await HelpRequest.create({
+        const rec = new HelpRequest({
             ...requestData,
             requestedTo: [...nearbyUsers,...friends]
         })
+
+        await rec.save();
 
         /*if(rec){
             const devTokens = await User.find({ _id : {$in: rec.requestedTo}}, {_id: 0}).select("deviceRegistrationTokens");
@@ -58,8 +60,11 @@ class HelpRequestService{
         
     }
 
-    async showRequest(){
-
+    async getHelpRequests(userId){
+        return await HelpRequest.find({"requestedTo.uid": userId, 
+                                       "requestedTo.status": {$in: ["Pending","Accepted"]} })
+                                       .populate('creatorId','_id firstName lastName phone image location')
+                                       .select("-requestedTo")
     }
 
     async takeAction(requestId, action,userId){

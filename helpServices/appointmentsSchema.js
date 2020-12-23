@@ -27,4 +27,10 @@ const AppointmentsSchema = new Schema({
     timestamps: true
 })
 
+AppointmentsSchema.virtual('finder', {
+    ref: 'User',
+    localField: 'finderId', 
+    foreignField: '_id' 
+});
+
 module.exports = Mongoose.model("Appointments", AppointmentsSchema);

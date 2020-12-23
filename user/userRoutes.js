@@ -27,5 +27,7 @@ router.post("/deviceRegistrationToken", UserController.addDeviceRegistrationToke
 
 router.post("/review",UserController.giveReview);
 
+router.post("/report", UserController.reportUser);
+
 router.post('/upload/image', upload.single('photo'),UserController.uploadImage);
 module.exports = router;

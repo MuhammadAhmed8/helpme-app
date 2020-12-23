@@ -97,6 +97,16 @@ const User = new Schema(
                 type:String,
                 unique: true
             }
+        ],
+
+        reports:[
+            {
+                label:String,
+                reportedBy: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'User'
+                }
+            }
         ]
 
 

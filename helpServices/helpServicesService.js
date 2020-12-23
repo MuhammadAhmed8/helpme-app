@@ -1,6 +1,8 @@
 const serviceSchema = require('./servicesSchema');
 const User = require('../user/userSchema');
 const appointmentsSchema = require('./appointmentsSchema');
+const helpRequestSchema = require('../helpRequest/helpRequestSchema');
+const HelpRequestService = require('../helpRequest/helpRequestService');
 
 class Service{
     constructor(){}
@@ -150,7 +152,8 @@ class Service{
 
     async allServicesAppointmentsGot(userId,status){
         console.log(userId);
-        return await appointmentsSchema.find({serviceProviderId: userId});
+        return await appointmentsSchema.find({serviceProviderId: userId, status: {$in: ["Pending","Accepted"]}} )
+                                        .populate("finderId", "_id firstName lastName image phone location");
     }
 
     async allServicesAppointmentsPosted(userId, status){
