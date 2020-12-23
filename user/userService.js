@@ -62,7 +62,6 @@ class UserService{
     }
 
     async addDeviceRegistrationToken(userId,devToken){
-        console.log("hii");
         const exists =  await User.findOne({_id: userId, deviceRegistrationTokens: devToken}).select("_id");
 
         if(exists) return;
@@ -72,8 +71,6 @@ class UserService{
         }});
 
     }
-
-
 
 
     async giveReview(content,user1_id,user2_id){
@@ -94,6 +91,11 @@ class UserService{
                         }
                     }});
         }
+
+        async uploadProfilePhoto(uid,file){
+            await User.updateOne({_id: uid}, {$set: {image: file.path}});
+        }
+
 
 }
 

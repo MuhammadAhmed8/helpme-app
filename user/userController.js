@@ -81,12 +81,26 @@ exports.giveReview = async (req,res,next) => {
 
         const review = await userService.giveReview(content,user1_id,user2_id);
 
-        res.status(200).json(review);
+        res.status(200).json({
+            success: true
+        });
 
     }
     catch(e){
         next(e);
     }
 
+}
+
+
+exports.uploadImage = async (req, res, next) => {
+    
+    try{
+        await userService.uploadProfilePhoto(req.user.id,req.file);
+        res.json(req.file);
+    }
+    catch(e){
+        next(e);
+    }
 }
 
