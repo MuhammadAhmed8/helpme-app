@@ -8,7 +8,7 @@ const postRoutes = require('./post/postRoutes');
 const helpRequestRoutes = require('./helpRequest/helpRequestRoutes');
 const servicesRoutes = require("./helpServices/helpServicesRoutes");
 const ratingsRoutes = require("./ratings/ratingsRoutes");
-
+var path = require('path');
 // https://docs.google.com/document/d/1vof93vN56kBMxxc3iFvHwYbH_soDA4zPAqBC-M76Xog/edit?usp=sharing
 
 const port = process.env.PORT || 4001;
@@ -20,8 +20,7 @@ function startServer(){
     app.use(bodyParser.urlencoded({extended:false}));
 
     app.use(bodyParser.json());
-    app.use(express.static('public'));
-
+    app.use('/public', express.static(path.join(__dirname, 'public')))
 
     app.set('view engine', 'ejs');
     
