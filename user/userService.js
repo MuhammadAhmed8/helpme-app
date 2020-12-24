@@ -100,7 +100,7 @@ class UserService{
         }
 
         async uploadProfilePhoto(uid,file){
-            await User.updateOne({_id: uid}, {$set: {image: file.path}});
+            await User.updateOne({_id: uid}, {$set: {image: file.filename}});
         }
 
         async reportUser(reportedBy,reportedTo,label){
