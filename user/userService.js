@@ -39,7 +39,7 @@ class UserService{
     }
 
 
-    async addFriend(user1_id,friendPhone){
+    async addFriend(user1_id,phone){
         const user2 = await User.findOne({phone: phone}).select("_id");
         await User.updateOne({_id: user1_id}, {$addToSet: {
             friends : user2._id
