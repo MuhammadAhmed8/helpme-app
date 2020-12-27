@@ -9,7 +9,7 @@ exports.createHelpRequest = async (req,res,next) => {
         const requestData = {
             creatorId : req.user.id,
             description : req.body.description.toLowerCase(),
-            bloodGroup : req.body.bloodGroup
+            bloodGroup : req.body.bloodGroup,
         };
 
         const userLocation = {
@@ -23,6 +23,10 @@ exports.createHelpRequest = async (req,res,next) => {
         if(req.body.nearbyUsersAllowed !== undefined){
             requestData['nearbyUsersAllowed'] = req.body.nearbyUsersAllowed;
         }
+        if(req.body.fnfAllowed !== undefined){
+            requestData['fnf'] = req.body.fnf;
+        }
+
 
         const helpRequestService = new HelpRequestService();
         const rec = await helpRequestService.createHelpRequest(userLocation,requestData);

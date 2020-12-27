@@ -28,6 +28,25 @@ class Service{
 
     }
 
+    async unregisterService(userId,serviceName){
+
+      const service = await serviceSchema.findOne({name: serviceName.toLowerCase()});
+      
+      if(!service)
+          throw new Error('Service not found');
+
+      await User.updateOne({_id: userId}, {
+          $pop: {
+              services: service._id
+          }
+      });
+
+      return true;
+
+  }
+
+
+
     async addServices(serviceName, parentName){
 
         const p = parentName && await serviceSchema.findOne({name: parentName}, {_id : 1});
@@ -49,6 +68,10 @@ class Service{
 
     async getAllServices(){
         return await serviceSchema.find({});
+    }
+
+    async getServicesByUser(userId){
+      return await User.findOne({_id:userId}, {services: 1, _id:0}).populate("services","_id name");
     }
 
     async findServiceProviders(serviceName){
