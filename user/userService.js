@@ -67,6 +67,10 @@ class UserService{
         return await User.findById(userId, {_id:0, friends:1});
     }
 
+    async getAllFriends(userId){
+        return await User.findOne({_id: userId},{"friends": 1,"_id": 0}).populate("friends","_id firstName lastName phone image email");
+    }
+
     async isUserReputationValid(userId){
        const u = await User.findById(userId).select("reports");
        const n = u.reports !== undefined ? u.reports.length : 0;

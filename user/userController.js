@@ -159,3 +159,13 @@ exports.uploadImage = async (req, res, next) => {
     }
 }
 
+exports.getAllFriends = async (req, res, next) => {
+    
+    try{
+        const friends = await userService.getAllFriends(req.user.id);
+        res.status(200).json(friends);
+    }
+    catch(e){
+        next(e);
+    }
+}

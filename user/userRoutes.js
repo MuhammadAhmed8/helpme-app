@@ -21,6 +21,7 @@ router.put("/location",UserController.updateLocation);
 
 router.post("/friend",UserController.addFriend);
 router.delete("/friend",UserController.removeFriend);
+router.get("/friends",UserController.getAllFriends);
 
 
 router.get("/profile/:personId",UserController.getProfile);
