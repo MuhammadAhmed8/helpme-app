@@ -42,7 +42,9 @@ class AuthService{
 
         return {
             token: token,
-            user: user
+            user: {
+                _id: user._id
+            }
         }    
         
 
@@ -70,7 +72,9 @@ class AuthService{
 
         return {
             token: token,
-            user: user
+            user: {
+                _id: user._id
+            }
         }
     }
 
