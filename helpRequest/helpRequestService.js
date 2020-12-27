@@ -77,10 +77,16 @@ class HelpRequestService{
     }
 
     async getHelpRequests(userId){
-        return await HelpRequest.find({"requestedTo.uid": userId, 
-                                       "requestedTo.status": {$in: ["Pending","Accepted"]} })
+        let hr = await HelpRequest.find({requestedTo: {$elemMatch: { "uid": userId, "status": {$in: ["Pending","Accepted"]} } }} , {"requestedTo.$": 1, "status": 1, "nearbyUsersAllowed" : 1 })
                                        .populate('creatorId','_id firstName lastName phone image location')
-                                       .select("-requestedTo")
+    
+        hr.forEach(r=>{
+            r['status'] = r.requestedTo[0].status;
+            r['requestedTo'] = undefined
+        })
+
+        return hr;
+
     }
 
     async takeAction(requestId, action,userId){

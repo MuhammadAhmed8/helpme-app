@@ -47,6 +47,15 @@ class UserService{
 
     }
 
+    async removeFriend(user1_id,friendPhone){
+        const user2 = await User.findOne({phone: phone}).select("_id");
+        await User.updateOne({_id: user1_id}, {$pop: {
+            friends : user2._id
+        }});
+
+    }
+
+
     async isFriend(user1_id, user2_id){
         const rec = await User.find({_id: user1_id, friends: user2_id}).select("_id");
         if(!rec)

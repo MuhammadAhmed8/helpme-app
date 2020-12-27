@@ -20,6 +20,8 @@ const { model } = require("./userSchema");
 router.put("/location",UserController.updateLocation);
 
 router.post("/friend",UserController.addFriend);
+router.delete("/friend",UserController.removeFriend);
+
 
 router.get("/profile/:personId",UserController.getProfile);
 

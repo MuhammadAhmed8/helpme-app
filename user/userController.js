@@ -34,15 +34,39 @@ exports.addFriend = async (req,res,next) => {
                 msg: "You cant befriend yourself"
             })
         }
-        const profile = await userService.addFriend(userId,friendphone);
-        res.status(200).json(profile);
+        await userService.addFriend(userId,friendphone);
+        res.status(200).json({
+            success:true
+        });
     }
     catch(e){
         next(e);
     }
 
+}
+
+exports.removeFriend = async (req,res,next) => {
+
+    try{
+        let userId = req.user.id;
+        let friendphone = req.body.phone;
+        if(userId === friendId){
+            res.status(402).json({
+                success: false,
+                msg: "You cant befriend yourself"
+            })
+        }
+        await userService.removeFriend(userId,friendphone);
+        res.status(200).json({
+            success: true
+        });
+    }
+    catch(e){
+        next(e);
+    }
 
 }
+
 
 exports.getProfile = async (req,res,next) => {
 
