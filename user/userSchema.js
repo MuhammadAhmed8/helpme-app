@@ -73,7 +73,7 @@ const User = new Schema(
         services: [
             {   
                 type: Schema.Types.ObjectId,
-                ref: "ServicesSchema"
+                ref: "Services"
             }
         ],
 

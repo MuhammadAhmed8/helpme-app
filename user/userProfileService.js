@@ -11,6 +11,7 @@ class UserProfileService{
 
         let profile = User.findOne({_id: personId})
                           .populate("reviews")
+                          .populate("services","_id name")
                           .select("_id firstName lastName image dob gender reviews email")
         
         const userService = new UserService();

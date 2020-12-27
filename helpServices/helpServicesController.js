@@ -27,6 +27,23 @@ exports.getServices = async (req,res,next) => {
 
 }
 
+exports.getUsersRegisteredServices = async (req,res,next) => {
+
+    try{
+ 
+        const servicesService = new ServicesService();
+
+        const record = await servicesService.getServicesByUser(req.user.id);
+    
+        res.status(200).json(record);
+
+    }
+    catch(e){
+        next(e);
+    }
+
+}
+
 exports.registerService = async (req,res,next) => {
 
     try{
