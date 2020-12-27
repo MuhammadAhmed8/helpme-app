@@ -24,7 +24,7 @@ exports.createHelpRequest = async (req,res,next) => {
             requestData['nearbyUsersAllowed'] = req.body.nearbyUsersAllowed;
         }
         if(req.body.fnfAllowed !== undefined){
-            requestData['fnf'] = req.body.fnf;
+            requestData['fnfAllowed'] = req.body.fnfAllowed;
         }
 
 
