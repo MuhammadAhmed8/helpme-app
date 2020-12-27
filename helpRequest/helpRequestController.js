@@ -56,3 +56,19 @@ exports.takeAction = async(req,res,next) => {
     }
 
 }
+
+
+exports.getHelpRequestsSent = async(req,res,next) => {
+
+    try{
+        const userId = req.user.id;
+        const helpRequestService = new HelpRequestService();
+        const rec = await helpRequestService.getHelpRequestsSent(userId);
+
+        res.status(200).json(rec);
+    }
+    catch(e){
+        next(e);
+    }
+
+}

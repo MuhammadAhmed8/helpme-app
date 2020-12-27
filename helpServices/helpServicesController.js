@@ -59,7 +59,7 @@ exports.servicesRequestReceived = async (req,res,next) => {
         const servicesService = new ServicesService();
         const helpRequestService = new HelpRequestService();
         let serviceReq =  servicesService.allServicesAppointmentsGot(userId,status);
-        let helpReq =  helpRequestService.getHelpRequests(userId);
+        let helpReq =  helpRequestService.getHelpRequestsReceived(userId);
         Promise.all([serviceReq,helpReq]).then(result => {
             console.log(result);
             return res.status(200).json({

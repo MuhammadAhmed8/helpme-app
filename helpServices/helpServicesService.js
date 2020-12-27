@@ -152,7 +152,7 @@ class Service{
 
     async allServicesAppointmentsGot(userId,status){
         console.log(userId);
-        return await appointmentsSchema.find({serviceProviderId: userId, status: {$in: ["Pending","Accepted"]}} )
+        return await appointmentsSchema.find({serviceProviderId: userId, status: {$in: ["Pending","Accepted","Completed"]}} )
                                         .populate("finderId", "_id firstName lastName image phone location");
     }
 

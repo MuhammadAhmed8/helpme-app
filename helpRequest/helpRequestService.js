@@ -76,8 +76,8 @@ class HelpRequestService{
         
     }
 
-    async getHelpRequests(userId){
-        let hr = await HelpRequest.find({requestedTo: {$elemMatch: { "uid": userId, "status": {$in: ["Pending","Accepted"]} } }} , {"requestedTo.$": 1, "status": 1, "nearbyUsersAllowed" : 1 })
+    async getHelpRequestsReceived(userId){
+        let hr = await HelpRequest.find({requestedTo: {$elemMatch: { "uid": userId, "status": {$in: ["Pending","Accepted","Completed"]} } }} , {"requestedTo.$": 1, "status": 1, "nearbyUsersAllowed" : 1 })
                                        .populate('creatorId','_id firstName lastName phone image location')
     
         hr.forEach(r=>{
@@ -88,6 +88,16 @@ class HelpRequestService{
         return hr;
 
     }
+
+    async getHelpRequestsSent(userId){
+        let hr = await HelpRequest.find({creatorId: userId})
+                                       .populate('requestedTo.uid','_id firstName lastName phone image location')
+    
+
+        return hr;
+
+    }
+    
 
     async takeAction(requestId, action,userId){
 
