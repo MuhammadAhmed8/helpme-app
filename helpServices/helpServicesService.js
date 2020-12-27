@@ -14,7 +14,7 @@ class Service{
         if(!service)
             throw new Error('Service not found');
 
-        if(await User.findOne({'services': service._id})) {
+        if(await User.findOne({_id: userId, 'services': service._id})) {
             throw new Error('Already registered');
         }
 
