@@ -28,12 +28,7 @@ exports.addFriend = async (req,res,next) => {
     try{
         let userId = req.user.id;
         let friendphone = req.body.phone;
-        if(userId === friendId){
-            res.status(402).json({
-                success: false,
-                msg: "You cant befriend yourself"
-            })
-        }
+        
         await userService.addFriend(userId,friendphone);
         res.status(200).json({
             success:true
