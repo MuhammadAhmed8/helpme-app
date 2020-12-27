@@ -13,7 +13,7 @@ const HelpRequest = new Schema({
 
     status: {
         type: String,
-        enum: ['Pending', 'Accepted'],
+        enum: ['Pending', 'Accepted','Rejected','Completed'],
         default: "Pending",
     },
 
@@ -23,7 +23,7 @@ const HelpRequest = new Schema({
             uid : { type: Schema.Types.ObjectId,ref: 'User'},
             status: {
                 type: String,
-                enum: ['Pending','Rejected','Accepted'],
+                enum: ['Pending','Rejected','Accepted','Completed'],
                 default: 'Pending'
             }
     

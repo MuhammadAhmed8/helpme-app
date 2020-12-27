@@ -17,7 +17,7 @@ const AppointmentsSchema = new Schema({
 
     status: {
         type: String,
-        enum: ['Pending','Rejected','Accepted'],
+        enum: ['Pending','Rejected','Accepted','Completed'],
         default: 'Pending'
     },
     
@@ -26,6 +26,7 @@ const AppointmentsSchema = new Schema({
 {
     timestamps: true
 })
+
 
 AppointmentsSchema.virtual('finder', {
     ref: 'User',
